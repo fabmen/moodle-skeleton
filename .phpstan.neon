@@ -1,0 +1,11 @@
+includes:
+    - vendor/micaherne/phpstan-moodle/extension.neon
+parameters:
+	parallel:
+		maximumNumberOfProcesses: 3
+	level: 8
+#	paths:
+#		- packages
+    moodle:
+        rootDirectory: /chemin/vers/moodle
+        addCommonIncludes: false

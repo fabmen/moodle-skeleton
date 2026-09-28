@@ -1,0 +1,60 @@
+{
+    "name": "moodle/dev",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "moodle/composer-installer":"*",
+        "moodle/moodle-composer-scaffold":"*",
+        "moodle/moodle":"^5.2",
+        "moodle-an-hochschulen/moodle-theme_boost_union": "2026042012"
+    },
+    "repositories": [
+        {
+            "name": "Moodle",
+            "type": "composer",
+            "url": "https://moodle.org"
+         },
+        {
+            "name": "Middag",
+            "type": "composer",
+            "url": "https://satis.middag.com.br",
+            "exclude": ["moodle/moodle"]
+         }
+    ],
+      "extra": {
+         "install-path": "moodle/",
+         "haspublicdir": "public/"
+    },
+    "config": {
+        "allow-plugins": {
+            "moodle/composer-installer": true,
+            "moodle/moodle-composer-scaffold": true,
+            "composer/installers": false,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        },
+		"policy": {
+            "advisories": {
+                 "block": false
+            }
+        }
+    },
+    "scripts": {
+        "mdl install": "php moodle/admin/cli/install.php",
+        "rectort": "rector -c ./.config/rector.php  process --dry-run",
+        "rectorp": "rector -c ./.config/rector.php  process"
+
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "*",
+        "squizlabs/php_codesniffer": "*",
+        "phpmd/phpmd": "*",
+        "phpstan/phpstan": "*",
+        "phpstan/extension-installer": "*",
+        "moodlehq/moodle-cs": "*",
+        "micaherne/phpstan-moodle": "*",
+        "vimeo/psalm": "*",
+        "micaherne/rector-moodle": "dev-main",
+        "rector/rector": "*"
+    }
+}

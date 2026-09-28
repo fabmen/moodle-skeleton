@@ -1,0 +1,64 @@
+{
+    "name": "moodle-dev",
+    "service": "cli",
+    "remoteUser": "vscode",
+    "shutdownAction": "stopCompose",
+    "dockerComposeFile": "docker-compose.yaml",
+    "workspaceFolder": "/var/www/html",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[php]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+                    },
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": "explicit"
+                },
+                "editor.formatOnSave": true,
+                "editor.renderWhitespace": "all",
+                "files.autoSave": "onFocusChange",
+                "files.eol": "\n",
+                "files.insertFinalNewline": true,
+                "files.trimTrailingWhitespace": true,
+                "intelephense.environment.phpVersion": "8.4",
+                "intelephense.telemetry.enabled": false,
+                "php-cs-fixer.config": "/var/www/.config/.php-cs-fixer.php",
+                "php-cs-fixer.executablePath": "/var/www/vendor/bin/php-cs-fixer",
+                "php-cs-fixer.onsave": true,
+                "php-cs-fixer.rules": "@PSR12",
+                "php.validate.executablePath": "/usr/local/bin/php",
+                "phpstan.checkValidity": true,
+                "psalm.configPaths": [
+                    ".config/psalm.xml"
+                ],
+                "phpstan.configFile": ".phpstan.neon",
+                "phpstan.memoryLimit": "1500M",
+                "telemetry.telemetryLevel": "off",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/bin/bash",
+                        "icon": "terminal-bash"
+                    }
+                },
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "junstyle.php-cs-fixer",
+                "ms-azuretools.vscode-docker",
+                "streetsidesoftware.code-spell-checker",
+                "usernamehw.errorlens",
+                "zobo.php-intellisense",
+                "eamodio.gitlens",
+                "EditorConfig.EditorConfig",
+                "mikestead.dotenv",
+                "xdebug.php-debug",
+                "SanderRonde.phpstan-vscode",
+                "ecodes.vscode-phpmd",
+                "getpsalm.psalm-vscode-plugin"
+            ]
+        }
+    }
+    // "postCreateCommand": "composer require rector/rector --dev"
+}
