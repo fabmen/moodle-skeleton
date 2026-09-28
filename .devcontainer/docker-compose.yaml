@@ -5,19 +5,20 @@ services:
       context: ./container/cli/.
       dockerfile: Dockerfile
       args: 
-        - PHP_VERSION=8.4
-        - TIMEZONE=Europe/Paris
-        - OS_USERID=1000
-        - OS_USERNAME=vscode  
+        - PHP_VERSION=${PHP_VERSION}
+        - TIMEZONE=${TIMEZONE}
+        - OS_USERID=${OS_USERID}
+        - OS_USERNAME=${OS_USERNAME}
+        - WORKDIR=${WORKDIR}
     container_name: mdl-cli
     user: vscode
     command: sleep infinity
     depends_on:
         - db
     volumes:
-        - mdl-vendor:/var/www/html/vendor
-        - mdl-moodle:/var/www/html
-        - ../data:/var/www/html/data
+        - "mdl-vendor:${WORKDIR}/vendor"
+        - "..:${WORKDIR}"
+        - "../data:${WORKDIR}/data"
   
     environment: 
       MOODLE_AGREE_LICENSE: "Y"
@@ -48,10 +49,9 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - mdl-moodle:/var/www/html
-      - ../data:/var/www/html/data
+      - "..:${WORKDIR}"
+      - "../data:${WORKDIR}/data"
       - ./container/web/default.conf:/etc/nginx/conf.d/default.conf
-#      - ./container/web/nginx.conf:/etc/nginx/nginx.conf
     user: "nginx"
   
   php:
@@ -59,15 +59,16 @@ services:
       context: ./container/php/.
       dockerfile: Dockerfile
       args: 
-        - PHP_VERSION=8.4
-        - TIMEZONE=Europe/Paris
-        - OS_USERID=1000
-        - OS_USERNAME=vscode
+        - PHP_VERSION=${PHP_VERSION}
+        - TIMEZONE=${TIMEZONE}
+        - OS_USERID=${OS_USERID}
+        - OS_USERNAME=${OS_USERNAME}
+        - WORKDIR=${WORKDIR}
     container_name: mdl-php
     volumes:
-        - mdl-vendor:/var/www/html/vendor
-        - mdl-moodle:/var/www/html
-        - ../data:/var/www/html/data
+        - "mdl-vendor:${WORKDIR}/vendor"
+        - "..:${WORKDIR}"
+        - "../data:${WORKDIR}/data"
 
     user: vscode
 

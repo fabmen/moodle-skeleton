@@ -13,6 +13,8 @@ ENV TZ=${TIMEZONE}
 ARG OS_USERID
 ARG OS_USERNAME
 
+ARG WORKDIR
+
 # PHP Composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -71,11 +73,11 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync \
 
 
 RUN set -eux \
-    && mkdir -p /var/www/html/moodle /var/www/html/vendor \
+    && mkdir -p ${WORKDIR}/moodle ${WORKDIR}/vendor \
     && addgroup -g ${OS_USERID} -S ${OS_USERNAME} && adduser -u ${OS_USERID} -D ${OS_USERNAME} -G ${OS_USERNAME} -s /bin/sh \
-    && chown -R ${OS_USERNAME}:${OS_USERNAME} /var/www/html
+    && chown -R ${OS_USERNAME}:${OS_USERNAME} ${WORKDIR}
 USER ${OS_USERNAME}
-WORKDIR /var/www/html
+WORKDIR ${WORKDIR}
 
 
 EXPOSE 9000
